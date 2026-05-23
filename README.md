@@ -1,30 +1,28 @@
 # 🏥 Omni Health: AI-Powered Medical Diagnostic Suite
 
 [![Streamlit App](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=Streamlit&logoColor=white)](https://omni-health.streamlit.app/)
-[![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
+[![Python](https://img.shields.io/badge/Python-3.13%2B-blue)](https://www.python.org/)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 [![NIT Kurukshetra](https://img.shields.io/badge/NIT%20Kurukshetra-Project-orange)](https://nitkkr.ac.in/)
 
 ## 📋 Overview
 
-**Omni Health** is an integrated intelligent medical diagnostic platform that combines **Deep Learning**, **Machine Learning**, and **Natural Language Processing** to assist healthcare professionals in diagnosis and risk assessment. Built with cutting-edge AI technologies, it provides a unified interface for medical imaging analysis, disease prediction, and clinical report insights.
+**Omni Health** is an integrated, intelligent medical diagnostic platform combining **Deep Learning (Computer Vision)**, **Machine Learning**, and **Natural Language Processing (RAG)** to assist healthcare professionals in real-time clinical workflows. Built with a production-ready multi-page Streamlit interface, it delivers unified diagnostic insights across medical imaging, cardiovascular predictive metrics, and automated clinical documentation analysis.
 
 ### Key Features
-- 🎯 **Deep Learning Models**: YOLOv11-based fracture detection and chest pathology analysis
-- 📊 **ML Predictors**: Risk assessment models for Diabetes and Heart Disease
-- 🤖 **NLP Assistant**: AI-powered medical report analysis with RAG-enabled Q&A
-- 🎨 **Intuitive UI**: Built with Streamlit for seamless clinical workflows
-- ⚡ **Real-time Processing**: Instant medical image and data analysis
+* 📷 **Neural Imaging Suite**: Real-time object detection for bone fractures and multi-label classification for structural chest pathologies.
+* 📊 **Predictive Analytics**: Robust risk scoring engine for chronic cardiovascular health indicators.
+* ✍️ **NLP Report Assistant**: Context-aware Medical Report Analyzer utilizing generative RAG for conversational insight extraction.
+* 🛡️ **Production Engineering**: Built-in failsafes for edge-case request limits, cross-device compatibility, and asynchronous session states.
 
 ---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Python 3.8 or higher
-- pip (Python package manager)
-- 4GB+ RAM recommended
-- GPU support (optional, for faster inference)
+* Python 3.13 or higher
+* Valid Google AI Studio API Key (for the NLP RAG Module)
+* Standard computing memory (4GB+ RAM recommended; handles CPU fallback natively)
 
 ### Installation
 
@@ -34,76 +32,71 @@
    cd Omni-Health
    ```
 
-2. **Create a virtual environment** (recommended)
+2. **Set up a Virtual Environment**
    ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   python -m venv .venv
+   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
    ```
 
-3. **Install dependencies**
+3. **Install Production Dependencies**
    ```bash
    pip install -r requirements.txt
    ```
 
-4. **Run the application**
+4. **Launch the Portal**
    ```bash
    streamlit run app.py
    ```
 
-The application will open at `http://localhost:8501`
+---
+
+## 📂 Project Structure
+
+The codebase is organized into isolated functional modules following clean architecture principles:
+
+```text
+OMNI HEALTH/
+├── .streamlit/           # Global configuration settings
+├── models/               # Serialized model weights and neural binaries
+│   ├── fr1.pt            # YOLOv11 Bone Fracture Weights
+│   ├── best_model_chest.pkl # ConvNeXt Tiny Chest Pathology Weights
+│   └── heart-disease_model.pkl # Random Forest Predictive Weights
+├── src/                  # Central Backends & Algorithmic Engines
+│   ├── dl_engine.py      # Vision processing logic (YOLOv11 & ConvNeXt)
+│   ├── ml_engine.py      # Predictive inference logic (Random Forest)
+│   └── nlp_engine.py     # Generative RAG & text processing logic
+├── pages/                # Multi-page User Interface Layer
+│   ├── 1_📷_Detection.py # Computer Vision diagnostic interface
+│   ├── 2_📊_Prediction.py # Patient metric evaluation interface
+│   └── 3_✍️_Reporting.py # Contextual document chat interface
+└── app.py                # Launch entry point and central routing gateway
+```
 
 ---
 
-## 📦 Project Structure
+## 🔧 Technology Stack & Dependencies
 
-```
-Omni-Health/
-├── app.py                 # Main Streamlit application entry point
-├── requirements.txt       # Python dependencies
-├── models/               # Pre-trained ML and DL models
-│   ├── detection_models/
-│   └── prediction_models/
-├── pages/                # Streamlit multi-page application
-│   ├── Detection.py      # Deep Learning - Image analysis
-│   ├── Prediction.py     # Machine Learning - Risk prediction
-│   └── Reporting.py      # NLP - Medical report analysis
-├── src/                  # Source code utilities
-│   ├── preprocessing/
-│   ├── inference/
-│   └── utils/
-└── README.md            # Project documentation
-```
+### Core Architecture Breakdown
+| Component | Engine Technology | Purpose |
+| :--- | :--- | :--- |
+| **User Interface** | Streamlit | Rapid deployment of reactive analytical web pages |
+| **Computer Vision** | PyTorch / Ultralytics / OpenCV | Multi-modal neural diagnostics on medical imagery |
+| **Predictive Analytics** | Scikit-learn / Pandas | Classical machine learning for phenotypic scoring |
+| **Generative NLP** | Google GenAI SDK (`gemini-2.5-flash`) | Large Context Window RAG without standalone vector DBs |
+| **File Parsing** | PyPDF | Extraction and structural string processing of binary documents |
 
----
-
-## 🔧 Technology Stack
-
-### Core Frameworks
-| Technology | Purpose |
-|-----------|---------|
-| **Streamlit** | Web UI framework for data apps |
-| **PyTorch / TensorFlow** | Deep learning framework |
-| **Scikit-learn** | Machine learning algorithms |
-| **OpenCV** | Computer vision & image processing |
-| **Pandas** | Data manipulation & analysis |
-
-### AI/ML Components
-| Model | Use Case |
-|-------|----------|
-| **YOLOv11** | Real-time object detection for fractures |
-| **CNN Models** | Chest X-ray pathology classification |
-| **Random Forest / SVM** | Disease risk prediction |
-| **Transformer-based NLP** | Medical text analysis & RAG |
-
-### Dependencies
-```
-streamlit              # Web framework
-ultralytics           # YOLOv11 implementation
-opencv-python-headless # Image processing
-pandas                # Data handling
-scikit-learn          # ML algorithms
-joblib                # Model serialization
-pillow                # Image operations
+### Production Requirements (`requirements.txt`)
+```text
+streamlit
+ultralytics
+opencv-python-headless
+torch
+torchvision
+scikit-learn
+pandas
+google-genai
+pypdf
+pillow
 ```
 
 ---
@@ -111,146 +104,45 @@ pillow                # Image operations
 ## 🎯 Features & Modules
 
 ### 1. 📷 Deep Learning Detection Suite
-**Location**: `pages/Detection.py`
-
-Powered by YOLOv11, this module provides:
-- **Fracture Detection**: Identifies bone fractures in X-ray images
-- **Chest Pathology Analysis**: Detects pneumonia, tuberculosis, and other chest conditions
-- Real-time inference with high accuracy
-- Visual bounding box annotations on uploaded images
-
-**Dataset Reference**: VinDr-CXR for chest imaging
+* **Bone Fracture Localization**: Utilizes a custom **YOLOv11** architecture trained on the **FracAtlas** dataset to identify structural bone structural anomalies, generating dynamic annotated bounding boxes.
+* **Chest Pathology Classification**: Leverages a **ConvNeXt Tiny** backbone targeting the **NIH Chest X-ray** dataset. It screens for 14 individual conditions (e.g., Pneumonia, Effusion, Infiltration, Cardiomegaly) simultaneously via independent multi-label sigmoidal confidence parsing.
+* **Dynamic Thresholding**: Real-time adjustable sliders allow clinicians to balance sensitivity and precision constraints on the fly.
 
 ### 2. 📊 Machine Learning Risk Predictor
-**Location**: `pages/Prediction.py`
+* **Cardiovascular Risk Framework**: Implements a high-precision **Random Forest Classifier** trained against the classic **UCI Cleveland Heart Disease** dataset.
+* **Phenotypic Variable Parsing**: Evaluates incoming clinical values including blood pressure variations, cholesterol, resting electrocardiographic behaviors, and ST-segment slopes to calculate granular cardiac risk categories.
 
-Predictive models for chronic disease risk assessment:
-- **Diabetes Risk Prediction**: Assesses probability based on patient metrics
-- **Heart Disease Risk Model**: Evaluates cardiovascular disease likelihood
-- **Input Validation**: Ensures data quality before prediction
-- **Risk Scoring**: Generates actionable risk levels (Low/Medium/High)
-
-### 3. ✍️ NLP-Powered Report Analyzer
-**Location**: `pages/Reporting.py`
-
-Intelligent medical document processing:
-- **Automatic Report Parsing**: Extracts key information from clinical reports
-- **RAG-enabled Q&A**: Ask questions about medical documents in natural language
-- **Clinical Insights**: Summarizes complex medical terminology
-- **Multi-document Support**: Analyze multiple reports simultaneously
+### 3. ✍️ NLP-Powered Report Analyzer (RAG)
+* **Direct Context Ingestion**: Uses the massive context capability of `gemini-2.5-flash` to execute zero-loss Retrieval-Augmented Generation directly over complete medical text blocks.
+* **Cross-Suite Data Handoff**: Integrates with Streamlit's global `st.session_state`. Automated computer vision findings from the imaging suite can be passed seamlessly into the RAG compiler to auto-generate reports without forcing manual uploads.
+* **Double-Defense Security**: Codebase includes backend exception intercepts and frontend failsafes to gracefully catch cloud service traffic spikes (`503 UNAVAILABLE`), displaying informative user banners instead of critical script failures.
 
 ---
 
-## 💡 Usage Examples
+## ⚙️ Engineering Implementation Highlights
 
-### Running Detection
-1. Navigate to the "Deep Learning" section
-2. Upload an X-ray image (JPG, PNG)
-3. Select detection type (Fracture/Pathology)
-4. View annotated results with confidence scores
+### Cross-Device & Weight Compatibility Fix
+To handle cross-device compatibility (training on high-throughput CUDA clusters vs. executing local CPU client inference) and bypass modern payload constraints on legacy serialization models, the loading logic employs a secure mapping override:
 
-### Running Risk Prediction
-1. Go to "Machine Learning" predictor
-2. Enter patient health metrics
-3. Select disease to assess (Diabetes/Heart)
-4. Receive risk score and recommendations
-
-### Analyzing Medical Reports
-1. Open "NLP Assistant" section
-2. Upload medical report (PDF/TXT)
-3. Ask specific questions about the report
-4. Get AI-powered insights and summaries
-
----
-
-## 📈 Model Performance
-
-| Model | Task | Accuracy | Sensitivity |
-|-------|------|----------|-------------|
-| YOLOv11 (Fracture) | Bone fracture detection | 94.2% | 92.1% |
-| YOLOv11 (Chest) | Pathology classification | 91.8% | 89.5% |
-| Random Forest (Diabetes) | Risk prediction | 87.5% | 85.2% |
-| SVM (Heart Disease) | Risk prediction | 89.3% | 87.8% |
-
-*Note: Performance metrics based on validation datasets. Clinical validation recommended before deployment.*
-
----
-
-## ⚙️ Configuration
-
-### Environment Variables
-Create a `.env` file for sensitive configurations:
-```bash
-MODEL_PATH=./models
-UPLOAD_FOLDER=./uploads
-MAX_FILE_SIZE=50MB
-DEBUG=False
+```python
+# From src/dl_engine.py
+state_dict = torch.load(
+    "models/best_model_chest.pkl", 
+    map_location=torch.device('cpu'), 
+    weights_only=False # Enables loading complex custom model layer architectures safely
+)
 ```
 
-### Model Download
-Pre-trained models are automatically downloaded on first use. To manually download:
-```bash
-python scripts/download_models.py
+### High-Demand Failsafe Handling
+To prevent application failures during peak free-tier usage, the conversational interface wraps critical generative calls in high-defense exception frameworks:
+
+```python
+# From pages/3_✍️_Reporting.py
+try:
+    answer = nlp_engine.answer_question(report_content, user_query, history)
+except Exception:
+    answer = "⚠️ The AI service is experiencing a temporary traffic spike. Please try resubmitting your question."
 ```
-
----
-
-## 🔒 Security & Privacy
-
-- ✅ Local processing (no cloud data transmission)
-- ✅ HIPAA-compliant architecture
-- ✅ Automatic session cleanup
-- ✅ Encrypted model storage
-- ✅ Input validation & sanitization
-
----
-
-## 📚 Documentation
-
-- [API Documentation](docs/API.md)
-- [Model Details](docs/MODELS.md)
-- [Deployment Guide](docs/DEPLOYMENT.md)
-- [Contributing Guidelines](CONTRIBUTING.md)
-
----
-
-## 🐛 Troubleshooting
-
-### Common Issues
-
-**Issue**: Models not downloading
-```bash
-# Solution: Manual download
-python -m ultralytics download yolov11m.pt
-```
-
-**Issue**: Out of memory errors
-```bash
-# Solution: Use smaller models or reduce batch size
-# Edit config files in models/
-```
-
-**Issue**: Streamlit caching issues
-```bash
-# Solution: Clear Streamlit cache
-streamlit cache clear
-```
-
-For more help, see [FAQ](docs/FAQ.md) or open an [Issue](https://github.com/MuditNITKKR/Omni-Health/issues)
-
----
-
-## 🤝 Contributing
-
-We welcome contributions! Please follow these steps:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ---
 
@@ -262,48 +154,9 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 ## 👥 Authors & Contributors
 
-- **Mudit** - *Project Lead* - [GitHub Profile](https://github.com/MuditNITKKR)
-- **NIT Kurukshetra** - *Academic Institution*
-
-### Special Thanks
-- VinDr for the CXR dataset
-- Ultralytics for YOLOv11
-- Streamlit community
+* **Mudit** - *Project Lead & Core AI Engineer* - [GitHub Profile](https://github.com/MuditNITKKR)
+* **NIT Kurukshetra** - *Academic Sponsor (Artificial Intelligence & Machine Learning Engineering)*
 
 ---
 
-## 📞 Contact & Support
-
-- **Email**: mudit@example.com
-- **GitHub Issues**: [Report a bug](https://github.com/MuditNITKKR/Omni-Health/issues)
-- **Discussions**: [Ask a question](https://github.com/MuditNITKKR/Omni-Health/discussions)
-
----
-
-## 🎓 Citation
-
-If you use Omni Health in your research, please cite:
-
-```bibtex
-@software{omnihealth2026,
-  title={Omni Health: AI-Powered Medical Diagnostic Suite},
-  author={Mudit},
-  year={2026},
-  url={https://github.com/MuditNITKKR/Omni-Health}
-}
-```
-
----
-
-## ⭐ Acknowledgments
-
-- Streamlit for excellent web framework
-- Ultralytics for YOLOv11 implementation
-- scikit-learn and PyTorch communities
-- NIT Kurukshetra for research support
-
----
-
-**Made with ❤️ by Mudit at NIT Kurukshetra**
-
-*Last Updated: April 2026*
+**Made with ❤️ by Mudit at NIT Kurukshetra** *Last System Architecture Alignment: April 2026*
