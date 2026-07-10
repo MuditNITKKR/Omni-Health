@@ -2,7 +2,6 @@
 
 [![Streamlit App](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=Streamlit&logoColor=white)](https://omni-health.streamlit.app/)
 [![Python](https://img.shields.io/badge/Python-3.13%2B-blue)](https://www.python.org/)
-[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 [![NIT Kurukshetra](https://img.shields.io/badge/NIT%20Kurukshetra-Project-orange)](https://nitkkr.ac.in/)
 
 ## 📋 Overview
@@ -143,12 +142,6 @@ try:
 except Exception:
     answer = "⚠️ The AI service is experiencing a temporary traffic spike. Please try resubmitting your question."
 ```
-
----
-
-## 📄 License
-
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
 
 ---
 
